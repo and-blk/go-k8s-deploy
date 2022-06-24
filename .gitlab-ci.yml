@@ -1,0 +1,48 @@
+# This file is a template, and might need editing before it works on your project.
+# To contribute improvements to CI/CD templates, please follow the Development guide at:
+# https://docs.gitlab.com/ee/development/cicd/templates.html
+# This specific template is located at:
+# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Bash.gitlab-ci.yml
+
+# See https://docs.gitlab.com/ee/ci/yaml/index.html for all available options
+
+# you can delete this line if you're not using Docker
+variables:
+  IMAGE_NAME: "golang"
+  IMAGE_VERSION: "1.18.3"
+
+stages:
+  - build
+  - image_build
+  - run
+
+image: "$IMAGE_NAME:$IMAGE_VERSION"
+
+build:
+  stage: build
+  script:
+    - cd $CI_PROJECT_DIR/go_source
+    - go build .
+    - ls -la
+  tags:
+    - k8s-master
+  artifacts:
+    paths:
+      - go_source/main
+    expire_in: 1 week
+
+docker_build:
+  stage: image_build
+  image: "docker:stable"
+  script:
+    - docker build --build-arg TOKENARG=$PRJ_TOKEN --tag "gotestapp:$CI_COMMIT_SHORT_SHA" .
+  tags:
+  - k8s-master
+
+docker_run:
+  stage: run
+  image: "docker:20.10-dind"
+  script:
+    - docker run --rm gotestapp:$CI_COMMIT_SHORT_SHA
+  tags:
+  - k8s-master
