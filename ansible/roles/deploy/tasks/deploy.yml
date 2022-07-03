@@ -2,4 +2,4 @@
   become: false
   kubernetes.core.k8s:
     state: present
-    definition: "{{ lookup('file', 'deployment.yml') | from_yaml }}"
+    definition: "{{ lookup('template', 'templates/deployment.yml') | from_yaml }}"
