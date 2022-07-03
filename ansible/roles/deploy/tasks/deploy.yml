@@ -1,0 +1,23 @@
+- name: Deploy application to k8s cluster
+  k8s:
+    state: present
+    definition:
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: goapp-deployment
+        labels:
+          app: goapp
+      spec:
+        replicas: 3
+        selector:
+          matchLabels:
+            app: goapp
+        template:
+          metadata:
+            labels:
+              app: goapp
+          spec:
+            containers:
+            - name: goapp
+              image: "gotestapp:{{ ansible_env.CI_COMMIT_SHORT_SHA }}"
