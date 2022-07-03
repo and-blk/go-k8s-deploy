@@ -52,6 +52,6 @@ run:
   stage: run
   image: "gitlab.local.com:5050/and/k8s-infra/workbox:latest"
   script:
-    - make deploy
+    - BRANCH=$CI_COMMIT_REF_NAME make deploy
   tags:
     - main
