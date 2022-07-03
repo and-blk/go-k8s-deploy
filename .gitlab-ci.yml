@@ -25,6 +25,8 @@ workflow:
       variables:
         BUILD_TO: "main"
     - when: always
+  tags:
+    - main
 
 build:
   stage: build
@@ -37,6 +39,8 @@ build:
     paths:
       - go_source/main
     expire_in: 1 week
+  tags:
+    - main
 
 docker_build:
   stage: image_build
@@ -44,7 +48,7 @@ docker_build:
   script:
     - docker build --build-arg TOKENARG=$PRJ_TOKEN --tag "gotestapp:$CI_COMMIT_SHORT_SHA" .
   tags:
-  - k8s-master
+    - main
 
 run:
   stage: run
@@ -52,4 +56,4 @@ run:
   script:
     - make deploy
   tags:
-  - k8s-master
+    - main
