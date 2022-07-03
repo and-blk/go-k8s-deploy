@@ -31,10 +31,10 @@ build:
   script:
     - cd $CI_PROJECT_DIR/go_source
     - go build .
-  artifacts:
-    paths:
-      - go_source/main
-    expire_in: 1 week
+  # artifacts:
+  #   paths:
+  #     - go_source/main
+  #   expire_in: 1 week
   tags:
     - main
 
