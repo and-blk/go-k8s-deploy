@@ -9,7 +9,8 @@ RUN apt update \
     && apt-get clean \
     && jar -xvf artifacts.zip \
     && ls -la ./ \
-    && ls -la ./go_source
+    && ls -la ./bin \
+    && ls -la ./src
     # && chmod +x ./go_source/main
 
 ENTRYPOINT ["./go_source/main"]
