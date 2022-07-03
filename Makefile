@@ -13,7 +13,11 @@ define source_venv
 endef
 
 .PHONY: deploy
-deploy:
+deploy: docker-login
 	source $(VENV)/bin/activate;\
 	cd $(ANSIBLE_PATH);\
 	ansible-playbook -i $(BRANCH) --extra-vars "CI_COMMIT_SHORT_SHA=$(CI_COMMIT_SHORT_SHA)" --private-key=/sshkey k8s_deploy.yml 
+
+.PHONY: docker-login
+docker-login:
+	docker login --username $(USERNAME) --password $(PASSWORD) $(CI_REGISTRY_IMAGE)
