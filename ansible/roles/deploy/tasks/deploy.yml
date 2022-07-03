@@ -20,4 +20,4 @@
           spec:
             containers:
             - name: goapp
-              image: "gotestapp:{{ ansible_env.CI_COMMIT_SHORT_SHA }}"
+              image: "gotestapp:{{ CI_COMMIT_SHORT_SHA }}"
