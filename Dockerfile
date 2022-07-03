@@ -8,6 +8,8 @@ RUN apt update \
     && apt install fastjar -y \
     && apt-get clean \
     && jar -xvf artifacts.zip \
-    && chmod +x ./go_source/main
+    && ls -la ./ \
+    && ls -la ./go_source
+    # && chmod +x ./go_source/main
 
 ENTRYPOINT ["./go_source/main"]
