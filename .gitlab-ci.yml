@@ -42,7 +42,7 @@ docker_build:
   stage: image_build
   image: "docker:stable"
   script:
-    - ls -la
+    - ls -la go_source/
     - pwd
     - docker build --build-arg TOKENARG=$PRJ_TOKEN --tag "gotestapp:$CI_COMMIT_SHORT_SHA" .
   tags:
