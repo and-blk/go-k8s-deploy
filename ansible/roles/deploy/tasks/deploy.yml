@@ -1,5 +1,5 @@
 - name: Deploy application to k8s cluster
   become: false
-  k8s:
+  kubernetes.core.k8s:
     state: present
-    definition: deployment.yml
+    src: deployment.yml
