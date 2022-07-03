@@ -16,4 +16,4 @@ endef
 deploy:
 	source $(VENV)/bin/activate;\
 	cd $(ANSIBLE_PATH);\
-	ansible-playbook -i $(BRANCH) --private-key=/sshkey k8s_deploy.yml 
+	ansible-playbook -i $(BRANCH) --extra-vars CI_COMMIT_SHORT_SHA=$(CI_COMMIT_SHORT_SHA) --private-key=/sshkey k8s_deploy.yml 
