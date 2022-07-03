@@ -1,3 +1,8 @@
+- name: Log into DockerHub
+  docker_login:
+    username: "{{ DOCKERUSER }}"
+    password: "{{ DOCKERPASS }}"
+
 - name: Deploy application to k8s cluster
   become: false
   kubernetes.core.k8s:
