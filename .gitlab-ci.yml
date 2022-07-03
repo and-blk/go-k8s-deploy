@@ -33,8 +33,6 @@ build:
   script:
     - cd $CI_PROJECT_DIR/go_source
     - go build .
-  tags:
-    - k8s-master
   artifacts:
     paths:
       - go_source/main
