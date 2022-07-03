@@ -1,2 +1,2 @@
-- debug:
-    msg: "Hello from deploy job"
+- include_tasks: deploy.yml
+  when: host_role == "master"
