@@ -10,6 +10,7 @@
 variables:
   IMAGE_NAME: "golang"
   IMAGE_VERSION: "1.18.3"
+  BUILD_TO: "test"
 
 stages:
   - build
@@ -18,12 +19,18 @@ stages:
 
 image: "$IMAGE_NAME:$IMAGE_VERSION"
 
+workflow:
+  rules:
+    - if: $CI_COMMIT_REF_NAME == "main"
+      variables:
+        BUILD_TO: "main"
+    - when: always
+
 build:
   stage: build
   script:
     - cd $CI_PROJECT_DIR/go_source
     - go build .
-    - ls -la
   tags:
     - k8s-master
   artifacts:
@@ -39,10 +46,10 @@ docker_build:
   tags:
   - k8s-master
 
-docker_run:
+run:
   stage: run
   image: "docker:20.10-dind"
   script:
-    - docker run --rm gotestapp:$CI_COMMIT_SHORT_SHA
+    - make deploy
   tags:
   - k8s-master
