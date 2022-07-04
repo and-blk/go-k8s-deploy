@@ -22,7 +22,7 @@
   become: true
   command: "kubectl create secret generic regcred \
     --from-file=.dockerconfigjson=/root/.docker/config.json \
-    --type=kubernetes.io/dockerconfigjson"
+    --type=kubernetes.io/dockerconfigjson --namespace {{ CI_COMMIT_REF_NAME }}"
   ignore_errors: true
 
 - name: Create namespace
