@@ -1,15 +1,16 @@
 - name: Log into DockerHub
+  become: true
   docker_login:
     username: "{{ DOCKERUSER }}"
     password: "{{ DOCKERPASS }}"
     registry_url: gitlab.local.com:5050
-    reauthorize: yes
     validate_certs: no
     ca_cert: /usr/local/share/ca-certificates/gitlab.crt
 
 - name: k8s registry secret
+  become: true
   command: "kubectl create secret generic regcred \
-    --from-file=.dockerconfigjson=~/.docker/config.json \
+    --from-file=.dockerconfigjson=/root/.docker/config.json \
     --type=kubernetes.io/dockerconfigjson"
 
 - name: Deploy application to k8s cluster
