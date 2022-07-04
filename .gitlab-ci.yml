@@ -11,6 +11,7 @@ variables:
   IMAGE_NAME: "golang"
   IMAGE_VERSION: "1.18.3"
   BUILD_TO: "test"
+  APP_IMAGE: "$CI_REGISTRY_IMAGE/gotestapp:$CI_COMMIT_SHORT_SHA"
 
 stages:
   - build
@@ -42,9 +43,10 @@ docker_build:
   stage: image_build
   image: "docker:stable"
   script:
-    - ls -la go_source/
-    - pwd
-    - docker build --build-arg TOKENARG=$PRJ_TOKEN --tag "gotestapp:$CI_COMMIT_SHORT_SHA" .
+    # You have to push docker image to registry to access it from controleplain node, otherwise you just have this image on gitlab-runner host but not on controleplain
+    - docker login --username $USERNAME --password $PASSWORD $CI_REGISTRY_IMAGE
+    - docker build --tag $APP_IMAGE .
+    - docker push $APP_IMAGE
   tags:
     - main
 
@@ -52,6 +54,6 @@ run:
   stage: run
   image: "gitlab.local.com:5050/and/k8s-infra/workbox:latest"
   script:
-    - BRANCH=$CI_COMMIT_REF_NAME make deploy
+    - APP_IMAGE=$APP_IMAGE BRANCH=$CI_COMMIT_REF_NAME make deploy
   tags:
     - main
