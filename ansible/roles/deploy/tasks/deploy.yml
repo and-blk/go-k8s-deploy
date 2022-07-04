@@ -23,6 +23,7 @@
   command: "kubectl create secret generic regcred \
     --from-file=.dockerconfigjson=/root/.docker/config.json \
     --type=kubernetes.io/dockerconfigjson"
+  ignore_errors: true
 
 - name: Deploy application to k8s cluster
   become: false
