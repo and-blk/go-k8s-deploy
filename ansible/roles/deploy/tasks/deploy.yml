@@ -2,6 +2,8 @@
   docker_login:
     username: "{{ DOCKERUSER }}"
     password: "{{ DOCKERPASS }}"
+    registry_url: gitlab.local.com:5050
+    reauthorize: yes
 
 - name: Deploy application to k8s cluster
   become: false
