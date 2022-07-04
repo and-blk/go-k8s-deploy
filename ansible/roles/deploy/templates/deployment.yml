@@ -18,4 +18,4 @@ spec:
     spec:
       containers:
       - name: goapp
-        image: "{{ git.APP_IMAGE }}"
+        image: "{{ APP_IMAGE }}"
