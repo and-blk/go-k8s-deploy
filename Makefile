@@ -5,6 +5,7 @@ PIP ?= pip3
 SHELL = /bin/bash
 ANSIBLE_PATH ?= ansible
 USER ?= user
+ANS_VARS ?=
 export PATH := $(CURDIR)/$(VENV)/bin:$(PATH)
 export ANSIBLE_HOST_KEY_CHECKING=False
 
