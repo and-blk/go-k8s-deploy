@@ -5,6 +5,7 @@
     registry_url: gitlab.local.com:5050
     reauthorize: yes
     validate_certs: no
+    ca_cert: /usr/local/share/ca-certificates/gitlab.crt
 
 - name: Deploy application to k8s cluster
   become: false
