@@ -17,5 +17,5 @@ deploy:
 	source $(VENV)/bin/activate;\
 	cd $(ANSIBLE_PATH);\
 	mkdir .temp && envsubst < varfile.yml > .temp/vars.yml; \
-	ansible-playbook -i $(BRANCH) --extra-vars $${VARS} --private-key /sshkey k8s_deploy.yml
+	ansible-playbook -i $(BRANCH) --private-key /sshkey k8s_deploy.yml
 
