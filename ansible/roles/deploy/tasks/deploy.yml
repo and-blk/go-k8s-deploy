@@ -7,6 +7,11 @@
     validate_certs: no
     ca_cert: /usr/local/share/ca-certificates/gitlab.crt
 
+- name: Create .kube dir for root
+  ansible.builtin.file:
+    path: /root/.kube
+    state: directory
+
 - name: Copy k8s config for root user
   ansible.builtin.copy:
     src: /etc/kubernetes/admin.conf
