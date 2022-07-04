@@ -19,3 +19,5 @@ spec:
       containers:
       - name: goapp
         image: "{{ APP_IMAGE }}"
+      imagePullSecrets:
+      - name: regcred
