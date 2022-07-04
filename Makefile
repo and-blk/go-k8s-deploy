@@ -17,5 +17,5 @@ deploy:
 	source $(VENV)/bin/activate;\
 	cd $(ANSIBLE_PATH);\
 	ANS_VARS='APP_IMAGE="$(APP_IMAGE)" CI_COMMIT_SHORT_SHA=$(CI_COMMIT_SHORT_SHA) DOCKERUSER=$(USERNAME) DOCKERPASS=$(PASSWORD)'; \
-	ansible-playbook k8s_deploy.yml -i $(CI_COMMIT_REF_NAME) --private-key /sshkey --extra-vars $(ANS_VARS)
+	ansible-playbook k8s_deploy.yml -i $(CI_COMMIT_REF_NAME) --private-key /sshkey --extra-vars $${ANS_VARS}
 
