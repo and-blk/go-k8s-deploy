@@ -8,7 +8,6 @@
     ca_cert: /usr/local/share/ca-certificates/gitlab.crt
 
 - name: k8s registry secret
-  become: false
   command: "kubectl create secret generic regcred \
     --from-file=.dockerconfigjson=~/.docker/config.json \
     --type=kubernetes.io/dockerconfigjson"
