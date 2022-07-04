@@ -9,7 +9,7 @@
 
 - name: Copy k8s config for root user
   ansible.builtin.copy:
-    src: /etc/kubernetes/admin.com
+    src: /etc/kubernetes/admin.conf
     dest: /root/.kube/config
     remote_src: yes
 
