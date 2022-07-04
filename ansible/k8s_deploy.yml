@@ -4,5 +4,10 @@
   become: true
   become_method: sudo
   become_user: root
+  tasks:
+    - name: Include vars
+      include_vars:
+        file: .temp/vars.yaml
+        name: git
   roles:
     - deploy

@@ -1,7 +1,7 @@
 - name: Log into DockerHub
   docker_login:
-    username: "{{ DOCKERUSER }}"
-    password: "{{ DOCKERPASS }}"
+    username: "{{ git.DOCKERUSER }}"
+    password: "{{ git.DOCKERPASS }}"
 
 - name: Deploy application to k8s cluster
   become: false
