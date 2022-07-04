@@ -7,6 +7,12 @@
     validate_certs: no
     ca_cert: /usr/local/share/ca-certificates/gitlab.crt
 
+- name: Copy k8s config for root user
+  ansible.builtin.copy:
+    src: /etc/kubernetes/admin.com
+    dest: /root/.kube/config
+    remote_src: yes
+
 - name: k8s registry secret
   become: true
   command: "kubectl create secret generic regcred \
