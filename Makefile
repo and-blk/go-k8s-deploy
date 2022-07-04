@@ -1,5 +1,5 @@
 VENV ?= ~/.venv
-BRANCH ?=
+CI_COMMIT_REF_NAME ?=
 PYTHON ?= python3
 PIP ?= pip3
 SHELL = /bin/bash
@@ -17,5 +17,5 @@ deploy:
 	source $(VENV)/bin/activate;\
 	cd $(ANSIBLE_PATH);\
 	mkdir .temp && envsubst < varfile.yml > .temp/vars.yml; \
-	ansible-playbook -i $(BRANCH) --private-key /sshkey k8s_deploy.yml
+	ansible-playbook -i $(CI_COMMIT_REF_NAME) --private-key /sshkey k8s_deploy.yml
 
