@@ -17,5 +17,5 @@ endef
 deploy:
 	source $(VENV)/bin/activate;\
 	cd $(ANSIBLE_PATH);\
-	VARS="APP_IMAGE=$(APP_IMAGE) CI_COMMIT_SHORT_SHA=$(CI_COMMIT_SHORT_SHA) DOCKERUSER=$(USERNAME) DOCKERPASS=$(PASSWORD)"; \
+	VARS="APP_IMAGE='$(APP_IMAGE)' CI_COMMIT_SHORT_SHA=$(CI_COMMIT_SHORT_SHA) DOCKERUSER=$(USERNAME) DOCKERPASS=$(PASSWORD)"; \
 	ansible-playbook -i $(BRANCH) --extra-vars $$VARS --private-key=/sshkey k8s_deploy.yml 
