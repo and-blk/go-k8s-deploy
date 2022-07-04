@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: goapp-deployment
-  namespace: "{{ CI_COMMIT_SHORT_SHA }}"
+  namespace: "{{ CI_COMMIT_REF_NAME }}"
   labels:
     app: goapp
 spec:

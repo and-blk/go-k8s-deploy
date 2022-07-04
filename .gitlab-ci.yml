@@ -43,7 +43,6 @@ docker_build:
   stage: image_build
   image: "docker:stable"
   script:
-    # You have to push docker image to registry to access it from controleplain node, otherwise you just have this image on gitlab-runner host but not on controleplain
     - mkdir ~/.docker; echo $DOCKER_AUTH_CONFIG > ~/.docker/config.json
     - docker build --tag $APP_IMAGE .
     - docker push $APP_IMAGE
